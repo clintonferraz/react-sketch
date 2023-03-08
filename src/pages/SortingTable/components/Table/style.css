@@ -1,18 +1,18 @@
-.Table {
+.tableWrapper {
     font-family: 'Trebuchet MS', sans-serif;
 }
 
-.Table table{
+.tableWrapper table{
     border-collapse: collapse;
     
 }
 
-.Table td,.Table th{
+.tableWrapper td,.tableWrapper th{
     border: 1px solid black;
     width: 20rem;
 }
 
-.Table th{
+.tableWrapper th{
     cursor: pointer;
 }
 

@@ -1,0 +1,37 @@
+.toDoInput{
+    height: 4rem;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.toDoInput .new-todo-input{
+    width: 25rem;
+    height: 4rem;
+    outline: none;
+    padding: .8rem 1.3rem .8rem 1.3rem;
+    font-size: 1.4rem;
+    border: none;
+    background-color: #dfdfdf;
+    border-bottom: 5px solid rgb(122, 122, 122);
+    border-radius: 5px 0 0 5px;
+}
+
+.toDoInput .btn-add{
+    width: 5rem;
+    height: 4rem;
+    padding: .8rem;
+    font-size: 1.4rem;
+    color: white;
+    border: none;
+    background-color: #0066da;
+    border-bottom: 5px solid #003d83;
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.toDoInput .btn-add:hover{
+    background-color: #4996ee;
+    border-bottom: 5px solid #1a5ba7;
+}

@@ -1,4 +1,4 @@
-import { Table as TableComponent } from '../../components/Table'
+import { Table as TableComponent } from './components/Table'
 import { useEffect } from 'react'
 
 export function SortingTable() {

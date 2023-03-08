@@ -75,7 +75,7 @@ export function Table() {
 
 
   return (
-    <div className='Table'>
+    <div className='tableWrapper'>
       <table className='columns'>
         <tbody>
           <tr>
