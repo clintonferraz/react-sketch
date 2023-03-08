@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Entry } from '../../utils/Entries'
 import './style.css'
 
-export default function Table() {
+export function Table() {
+  
+  type Entry = {
+    API: string;
+    Description: string;
+    Auth: string;
+    HTTPS: boolean;
+    Cors: string;
+    Link: string;
+    Category: string;
+    HTTPS_string: string;
+  }
 
   const [data, setData] = useState<Entry[]>([])
   const [sortState, setSortState] = useState<{type: any; isAscending: boolean}>({ type: null, isAscending: true });
@@ -14,6 +24,8 @@ export default function Table() {
 
   const fetchData = async () => {
     const response = await axios.get("https://api.publicapis.org/entries");
+
+    //fill in the property HTTPS_string based on HTTPS property boolean data to better display
     const updatedData = response.data.entries.map((entry: Entry) => {
       return {
         ...entry,
@@ -45,7 +57,7 @@ export default function Table() {
       const y = b[type];
       if (typeof x === 'string' && typeof y === 'string') {
         const result = x.localeCompare(y);
-        return sortMultiplier * x.localeCompare(y);
+        return sortMultiplier * result;
       }
 
       if (typeof x === 'number' && typeof y === 'number') {
@@ -55,6 +67,7 @@ export default function Table() {
 
       return 0;
     });
+
     setData([...data]);
     setSortState({ type, isAscending });
   };
