@@ -7,7 +7,7 @@ export default function ToDoList() {
   const [list, setList] = useState<string[]>([])
 
   function handleAddItem(text: string){
-    setList([...list, text])
+    text != '' ? setList([...list, text]) : null
   }
   
   function deleteItem(index: number){
