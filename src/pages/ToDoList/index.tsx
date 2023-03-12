@@ -9,16 +9,23 @@ export default function ToDoList() {
   function handleAddItem(text: string){
     setList([...list, text])
   }
+  
+  function deleteItem(index: number){
+    setList(oldList => {
+      let newList = [...oldList];
+      newList.splice(index,1);
+      return newList;
+    })
+  }
 
 
   return (
     <div className='toDoList'>
       <div className="container">      
         <Input handleAdd={handleAddItem} />
-        <ListItem text='teste' />
         {
           list.map((listItem,index) => 
-           <ListItem text={listItem} key={index}/>
+           <ListItem text={listItem} key={index} index={index} deleteFunction={deleteItem}/>
           )
         }
         
