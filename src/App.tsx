@@ -4,6 +4,7 @@ import Home  from './pages/Home';
 import TokenFetch  from './pages/TokenFetch';
 import ToDoList  from './pages/ToDoList';
 import './global.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (

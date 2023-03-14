@@ -1,17 +1,3 @@
-.tableWrapper {
-    font-family: 'Trebuchet MS', sans-serif;
-}
-
-.tableWrapper table{
-    border-collapse: collapse;
-    
-}
-
-.tableWrapper td,.tableWrapper th{
-    border: 1px solid black;
-    width: 20rem;
-}
-
 .tableWrapper th{
     cursor: pointer;
 }

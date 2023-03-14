@@ -75,33 +75,33 @@ export function Table() {
 
 
   return (
-    <div className='tableWrapper'>
-      <table className='columns'>
-        <tbody>
-          <tr>
-            <th onClick={() => sortList(SortType.API)}>API Name { sortState.type === SortType.API ? sortState.isAscending ? '▲' : '▼' : '' }</th>
-            <th onClick={() => sortList(SortType.Description)}>Description { sortState.type === SortType.Description ? sortState.isAscending ? '▲' : '▼' : '' }</th>
-            <th onClick={() => sortList(SortType.Auth)}>Auth</th>
-            <th onClick={() => sortList(SortType.HTTPS_string)}>HTTPS</th>
-            <th onClick={() => sortList(SortType.Cors)}>Cors</th>
-            <th onClick={() => sortList(SortType.Link)}>Link</th>
-            <th onClick={() => sortList(SortType.Category)}>Category</th>
-          </tr>
-          {
-            data?.map((value, index) =>
-              <tr key={index}>
-                <td className='column'>{value.API}</td>
-                <td className='column'>{value.Description}</td>
-                <td className='column'>{value.Auth}</td>
-                <td className='column'>{value.HTTPS_string}</td>
-                <td className='column'>{value.Cors}</td>
-                <td className='column'>{value.Link}</td>
-                <td className='column'>{value.Category}</td>
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
+    <div className='d-flex tableWrapper bg-dark'>
+      <table className='container table table-dark table-striped'>
+          <tbody>
+            <tr>
+              <th onClick={() => sortList(SortType.API)}>API Name { sortState.type === SortType.API ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+              <th onClick={() => sortList(SortType.Description)}>Description { sortState.type === SortType.Description ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+              <th onClick={() => sortList(SortType.Auth)}>Auth { sortState.type === SortType.Auth ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+              <th onClick={() => sortList(SortType.HTTPS_string)}>HTTPS { sortState.type === SortType.HTTPS_string ? sortState.isAscending ? '▴' : '▾' : '' }   </th>
+              <th onClick={() => sortList(SortType.Cors)}>Cors { sortState.type === SortType.Cors ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+              <th onClick={() => sortList(SortType.Link)}>Link { sortState.type === SortType.Link ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+              <th onClick={() => sortList(SortType.Category)}>Category { sortState.type === SortType.Category ? sortState.isAscending ? '▴' : '▾' : '' }</th>
+            </tr>
+            {
+              data?.map((value, index) =>
+                <tr key={index}>
+                  <td >{value.API}</td>
+                  <td >{value.Description}</td>
+                  <td >{value.Auth}</td>
+                  <td >{value.HTTPS_string}</td>
+                  <td >{value.Cors}</td>
+                  <td >{value.Link}</td>
+                  <td >{value.Category}</td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
     </div>
   )
 }
