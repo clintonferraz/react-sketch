@@ -24,8 +24,8 @@ export default function ToDoList() {
       <div className="container">      
         <Input handleAdd={handleAddItem} />
         {
-          list.map((listItem,index) => 
-           <ListItem text={listItem} key={index} index={index} deleteFunction={deleteItem}/>
+          list.map((listItemText,index) => 
+           <ListItem text={listItemText} key={index} index={index} deleteFunction={deleteItem}/>
           )
         }
         

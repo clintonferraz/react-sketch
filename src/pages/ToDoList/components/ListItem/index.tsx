@@ -24,7 +24,7 @@ export default function ListItem(props: ListItemProps) {
     <div className="listItemWrapper">
         <div className="listItem">
           <div>
-            <input type="checkbox" name="" id="item-checkbox" onChange={(e) => handleCheck(e.target.checked)} checked={isChecked}/>
+            <input type="checkbox" name="" id="item-checkbox" onChange={(e) => handleCheck(e.target.checked)}/>
             <span style={isChecked ? {  textDecoration: 'line-through'} : undefined} >{ props.text }</span>
           </div>
           

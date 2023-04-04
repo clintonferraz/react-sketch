@@ -29,9 +29,13 @@
     text-align: center;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    transition: background-color 300ms;
+    transition: filter 300ms;
 }
 
 .toDoInput .btn-add:hover{
     background-color: #4996ee;
     border-bottom: 5px solid #1a5ba7;
+    filter: drop-shadow(0 0 0.4em #1a5ca7c9);
+    
 }

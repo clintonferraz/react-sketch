@@ -1,5 +1,5 @@
 import './style.css'
-import { useEffect , useState } from 'react'
+import { useState } from 'react'
 
 type InputProps = {
   handleAdd: (text: string) => void;
