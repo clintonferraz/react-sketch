@@ -5,8 +5,8 @@ import TokenFetch  from './pages/TokenFetch';
 import ToDoList  from './pages/ToDoList';
 import Form from './pages/Form';
 import './global.css';
-import 'bootstrap/dist/css/bootstrap.css';
-
+/* import 'bootstrap/dist/css/bootstrap.min.css'; */
+import 'bootstrap/scss/bootstrap.scss'; 
 function App() {
   return (
     <BrowserRouter>
