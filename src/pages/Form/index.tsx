@@ -10,26 +10,43 @@ type FormData = {
 }
 
 export default function Form() {
-    const [phone, setPhone] = useState("");
-    const [cpf, setCpf] = useState("");
+    const [formFields, setFormFields] = useState<FormData>({
+        name: '',
+        cpf: '',
+        email: '',
+        phone: '',
+    });
+
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-        data.phone = unMask(data.phone)
-        console.log(data);
-
-    }
+        const modifiedData = {
+          ...data,
+          phone: unMask(data.phone),
+          cpf: unMask(data.cpf)
+        };
+      
+        console.log(modifiedData);
+    };
 
     const applyMask = (eventTarget: HTMLInputElement) => {
-        switch (eventTarget.id) {
-            case 'phone':
-                setPhone(mask(unMask(eventTarget.value), ['(99) 9999-9999', '(99) 9 9999-9999']));
-                break;
+        const { id, value } = eventTarget;
+        let maskedValue = value;
+
+        switch (id) {
             case 'cpf':
-                setCpf(mask(unMask(eventTarget.value), ['999.999.999-99']));
-            default:
+                maskedValue = mask(unMask(value), ['999.999.999-99']);
                 break;
+            case 'phone':
+                maskedValue = mask(unMask(value), ['(99) 9999-9999', '(99) 9 9999-9999']);
+                break;
+            
         }
+        setFormFields((prevFields) => ({
+            ...prevFields,
+            [id]: maskedValue,
+          }));
+
     }
 
 
@@ -40,9 +57,15 @@ export default function Form() {
                     <h2 className="mb-3">My form</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row g-3">
+
                             <div className="form-group">
                                 <label htmlFor="name" className="form-label">Nome:</label>
-                                <input type="text" className="form-control" id="name" {...register('name', { required: true })} placeholder="Digite o Nome" />
+                                <input type="text"
+                                    className="form-control"
+                                    id="name"
+                                    value={formFields.name}
+                                    placeholder="Digite o Nome"
+                                    {...register('name', { required: true, onChange: (event) => applyMask(event.target) })} />
                             </div>
 
                             <div className="form-group">
@@ -52,7 +75,7 @@ export default function Form() {
                                     className="form-control"
                                     id="cpf"
                                     placeholder="Digite o CPF"
-                                    value={cpf} 
+                                    value={formFields.cpf}
                                     {...register('cpf', { onChange: (event) => applyMask(event.target) })}
                                 />
                             </div>
@@ -81,7 +104,7 @@ export default function Form() {
                                     className="form-control"
                                     id="phone"
                                     placeholder="(00) 0000-0000"
-                                    value={phone}
+                                    value={formFields.phone}
                                     {...register('phone', { onChange: (event) => applyMask(event.target) })}
                                 />
                             </div>
