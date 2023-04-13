@@ -16,6 +16,7 @@
     "react-hook-form": "^7.43.7",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.2",
+    "remask": "^1.0.1",
     "sass": "^1.61.0"
   },
   "devDependencies": {

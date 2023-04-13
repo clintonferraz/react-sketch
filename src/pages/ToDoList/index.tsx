@@ -4,10 +4,10 @@ import ListItem from './components/ListItem'
 import './style.css'
 
 export default function ToDoList() {
-  const [list, setList] = useState<string[]>([])
+  const [list, setList] = useState<{text: string, uniqueId: number}[]>([])
 
   function handleAddItem(text: string){
-    text != '' ? setList([...list, text]) : null
+    text != '' ? setList([...list, {text , uniqueId: new Date().getTime()}]) : null
   }
   
   function deleteItem(index: number){
@@ -16,6 +16,7 @@ export default function ToDoList() {
       newList.splice(index,1);
       return newList;
     })
+    console.log(list)
   }
 
 
@@ -24,9 +25,9 @@ export default function ToDoList() {
       <div className="container">      
         <Input handleAdd={handleAddItem} />
         {
-          list.map((listItemText,index) => 
-           <ListItem text={listItemText} key={index} index={index} deleteFunction={deleteItem}/>
-          )
+          list.map((listItemText,index) => {
+            return <ListItem text={listItemText.text} key={listItemText.uniqueId} index={index} deleteFunction={deleteItem}/>
+          })
         }
         
       </div>

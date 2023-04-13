@@ -815,6 +815,11 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+remask@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/remask/-/remask-1.0.1.tgz#22aa7f7db39d8e71222fe47b7b7550dfd1a4e846"
+  integrity sha512-mtFh6KO4Zjpr/OekxBUSMKC06/dI+L+XlrPgiufeEDik/CUgs1FKITDQ/Y1BetQiLSNNh/PK8G0hV0Bxp92VXw==
+
 resolve@^1.22.1:
   version "1.22.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"

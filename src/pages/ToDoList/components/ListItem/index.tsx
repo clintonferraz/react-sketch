@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 type ListItemProps = {
   text: string;
-  deleteFunction: (key: number) => void;
+  deleteFunction: (index: number) => void;
   index: number;
 }
 
@@ -17,7 +17,6 @@ export default function ListItem(props: ListItemProps) {
 
   function handleCheck(checked: boolean){
     setIsChecked(checked);
-
   }
 
   return (
@@ -25,7 +24,7 @@ export default function ListItem(props: ListItemProps) {
         <div className="listItem">
           <div>
             <input type="checkbox" name="" id="item-checkbox" onChange={(e) => handleCheck(e.target.checked)}/>
-            <span style={isChecked ? {  textDecoration: 'line-through'} : undefined} >{ props.text }</span>
+            <span style={isChecked ? {textDecoration: 'line-through'} : undefined} >{ props.text }</span>
           </div>
           
           <div className="deleteBtn" onClick={handleClick}><BsTrashFill /></div>
