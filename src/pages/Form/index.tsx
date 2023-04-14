@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { mask, unMask } from 'remask'
 import { validateCpf } from './utils/validateCpf'
+import { validateCnpj } from './utils/validateCnpj'
+import { validatePhoneNumber } from './utils/validatePhoneNumber'
 
 type FormData = {
     name: string,
@@ -26,9 +28,6 @@ export default function Form() {
 
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-
-
-
         //unmask some data field to remove special characters and use just what the user entered
         const modifiedData = {
             ...data,
@@ -40,8 +39,10 @@ export default function Form() {
         console.log(modifiedData);
     };
 
+
+
     //apply input mask to some form inputs, if inputMask is not specified then it should be undefined and the field will not be masked
-    const applyMask = (eventTarget: HTMLInputElement, inputMask: string[] | undefined = undefined) => {
+    function handleInputChange(eventTarget: HTMLInputElement, inputMask: string[] | undefined = undefined){
         const { id, value } = eventTarget;
         let maskedValue = inputMask ? mask(unMask(value), inputMask) : value;
 
@@ -50,7 +51,17 @@ export default function Form() {
             ...prevFields,
             [id]: maskedValue,
         }));
+    }
 
+    function validateCpfCnpj(value: string){
+        value = value.replace(/[^\d]/g, "");
+        if(value.length === 11){
+            return validateCpf(value);
+        }
+        if(value.length === 14){
+            return validateCnpj(value);
+        }
+        return false;
     }
 
     return (
@@ -73,10 +84,10 @@ export default function Form() {
                                     placeholder="Digite o Nome"
                                     {...register('name', {
                                         required: true,
-                                        onChange: (event) => applyMask(event.target),
+                                        onChange: (event) => handleInputChange(event.target),
                                     })}
                                 />
-                                {errors.name && errors.name.type == 'required' && <span>This Field Is Required</span>}
+                                {errors.name && errors.name.type == 'required' && <span className="text-danger">Este campo é obrigatório</span>}
                             </div>
 
 
@@ -89,11 +100,11 @@ export default function Form() {
                                     placeholder="Digite o CPF"
                                     value={formFields.cpf}
                                     {...register('cpf', {
-                                        onChange: (event) => applyMask(event.target, ['999.999.999-99', '99.999.999/9999-99']),
-                                        validate: (value) => value == '' || validateCpf(value),
+                                        onChange: (event) => handleInputChange(event.target, ['999.999.999-99', '99.999.999/9999-99']),
+                                        validate: (value) => value == '' || validateCpfCnpj(value),
                                     })}
                                 />
-                                {errors.cpf && errors.cpf.type == 'validate' && <span>CPF inválido</span>}
+                                {errors.cpf && errors.cpf.type == 'validate' && <span className="text-danger">CPF ou CNPJ inválido</span>}
                             </div>
 
 
@@ -108,11 +119,11 @@ export default function Form() {
                                         pattern:
                                         {
                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                            message: "Invalid email address"
+                                            message: "Endereço de email inválido"
                                         }
                                     })}
                                 />
-                                {errors.email && <span>{errors.email.message}</span>}
+                                {errors.email && errors.email.type == 'pattern' && <span className="text-danger">{errors.email.message}</span>}
                             </div>
 
 
@@ -123,8 +134,12 @@ export default function Form() {
                                     id="phone"
                                     placeholder="(00) 0000-0000"
                                     value={formFields.phone}
-                                    {...register('phone', { onChange: (event) => applyMask(event.target, ['(99) 9999-9999', '(99) 9 9999-9999']) })}
+                                    {...register('phone', { 
+                                        onChange: (event) => handleInputChange(event.target, ['(99) 9999-9999', '(99) 9 9999-9999']),
+                                        validate: (value) => value == "" || validatePhoneNumber(value)
+                                    })}
                                 />
+                                {errors.phone && errors.phone.type == 'validate' && <span className="text-danger">Número de telefone inválido</span>}
                             </div>
 
 
@@ -136,9 +151,10 @@ export default function Form() {
                                     className="form-control"
                                     id="dateOfBirth"
                                     value={formFields.dateOfBirth}
-                                    {...register('dateOfBirth', { onChange: (event) => applyMask(event.target) })}
+                                    {...register('dateOfBirth', { onChange: (event) => handleInputChange(event.target) })}
                                 />
                             </div>
+
 
                             <div className="form-group">
                                 <label htmlFor="time" className="form-label">DateTime Picker com segundos:</label>
@@ -151,9 +167,11 @@ export default function Form() {
                                     className="form-control"
                                     id="time"
                                     value={formFields.time}
-                                    {...register('time', { onChange: (event) => applyMask(event.target) })}
+                                    {...register('time', { onChange: (event) => handleInputChange(event.target) })}
                                 />
                             </div>
+
+
                             <div className="row mb-4"></div>
 
 
@@ -167,6 +185,7 @@ export default function Form() {
                                 >
                                     Cancel
                                 </button>
+
 
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </div>

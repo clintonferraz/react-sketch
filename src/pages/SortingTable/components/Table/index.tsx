@@ -73,10 +73,10 @@ export function Table() {
   };
 
   return (
-    <div className='tableWrapper'>
-      <div className="container">
+    <div className='tableWrapper' >
+      <div className="container-fluid pe-0 ps-0" >
         <div className="table-responsive" style={{maxHeight : "100vh"}}>
-          <table className='table table-dark table-bordered table-sm'>
+          <table className='table table-dark table-bordered table-sm'  >
             <thead style={{position: 'sticky', top:0, marginTop:0}}>
               <tr>
                 <th onClick={() => sortList(SortType.API)}>API Name {sortState.type === SortType.API ? sortState.isAscending ? '▴' : '▾' : ''}</th>
