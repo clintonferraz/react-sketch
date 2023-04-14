@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { mask, unMask } from 'remask'
+import { validateCpf } from './utils/validateCpf'
 
 type FormData = {
     name: string,
@@ -52,7 +53,6 @@ export default function Form() {
 
     }
 
-
     return (
         <div className="container">
             <div className="row justify-content-center mt-5 mb-5">
@@ -64,16 +64,19 @@ export default function Form() {
                         <div className="row g-3">
 
                             <div className="form-group">
-                                <label htmlFor="name" className="form-label">Nome:</label>
+                                <label htmlFor="name" className="form-label">Nome*:</label>
                                 <input type="text"
                                     className="form-control"
                                     /* The "id" attribute of the inputs must be equal the property in FormData type */
                                     id="name"
                                     value={formFields.name}
                                     placeholder="Digite o Nome"
-                                    {...register('name', { required: true, onChange: (event) => applyMask(event.target) })}
+                                    {...register('name', {
+                                        required: true,
+                                        onChange: (event) => applyMask(event.target),
+                                    })}
                                 />
-                                {errors.name && <span>This Field Is Required</span>}
+                                {errors.name && errors.name.type == 'required' && <span>This Field Is Required</span>}
                             </div>
 
 
@@ -85,8 +88,12 @@ export default function Form() {
                                     id="cpf"
                                     placeholder="Digite o CPF"
                                     value={formFields.cpf}
-                                    {...register('cpf', { onChange: (event) => applyMask(event.target, ['999.999.999-99', '99.999.999/9999-99']) })}
+                                    {...register('cpf', {
+                                        onChange: (event) => applyMask(event.target, ['999.999.999-99', '99.999.999/9999-99']),
+                                        validate: (value) => value == '' || validateCpf(value),
+                                    })}
                                 />
+                                {errors.cpf && errors.cpf.type == 'validate' && <span>CPF inválido</span>}
                             </div>
 
 
